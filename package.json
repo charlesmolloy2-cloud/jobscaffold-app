@@ -1,0 +1,42 @@
+{
+  "name": "jobscaffold-app",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "functions"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:browser": "npm run build:functions && NEXT_PUBLIC_USE_FIREBASE_EMULATORS=true npm run build && firebase emulators:exec --project demo-jobscaffold --only auth,firestore,functions 'node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.browser.config.cjs --runInBand'",
+    "build:functions": "npm --prefix functions run build",
+    "emulators": "npm run build:functions && firebase emulators:start --project demo-jobscaffold --only auth,firestore,functions",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.3.0",
+    "firebase": "13.1.0",
+    "next": "16.4.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@types/jest": "30.0.0",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "firebase-tools": "15.34.1",
+    "jest": "30.5.2",
+    "jest-environment-jsdom": "30.5.2",
+    "playwright": "1.64.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "7.0.2"
+  }
+}
